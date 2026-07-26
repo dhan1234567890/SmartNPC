@@ -18,7 +18,7 @@ class Player:
         if self.health < 0:
             self.health = 0
 
-    def update(self, dt, screen_width, screen_height, obstacles, npcs, pickups):
+    def update(self, dt, screen_width, screen_height, obstacles, npcs, pickups, mouse_clicked = False):
         self.time_since_last_attack += dt
         keys = pygame.key.get_pressed()
         
@@ -65,7 +65,7 @@ class Player:
                 pickups.remove(pickup)
         
         # Handle attack
-        if keys[pygame.K_SPACE] and self.time_since_last_attack >= self.attack_cooldown and self.ammo > 0:
+        if (mouse_clicked or keys[pygame.K_SPACE]) and self.time_since_last_attack >= self.attack_cooldown and self.ammo > 0:
             self._attack(npcs, obstacles)
             
     def _attack(self, npcs, obstacles):

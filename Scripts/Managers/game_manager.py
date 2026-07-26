@@ -45,9 +45,10 @@ class GameManager:
         self.pickup_spawn_timer = 0.0
 
         self.game_over = False
+        self.win = False
         self.game_over_font = pygame.font.SysFont('Arial', 48, bold=True)
 
-    def update(self, dt):
+    def update(self, dt, mouse_clicked = False):
         if self.game_over:
             return
 
@@ -74,7 +75,7 @@ class GameManager:
                 self.pickups.append(Pickup(x, y, type_p))
 
         # Update player
-        self.player.update(dt, self.screen_width, self.screen_height, self.obstacles, self.npcs, self.pickups)
+        self.player.update(dt, self.screen_width, self.screen_height, self.obstacles, self.npcs, self.pickups, mouse_clicked=mouse_clicked)
         
         # Check player death
         if self.player.health <= 0:
@@ -99,12 +100,22 @@ class GameManager:
         self.npcs = alive_npcs
         self.ai_controllers = alive_ai
 
+        #check win condition
+        if len(self.npcs) == 0 and not self.game_over:
+            self.game_over = True
+            self.win = True
+
     def draw(self):
         # Draw game area
         self.screen.fill(self.bg_color, (0, 0, self.screen_width, self.screen_height))
         
         if self.game_over:
-            go_text = self.game_over_font.render("GAME OVER", True, (255, 0, 0))
+            if self.win:
+                msg, color = "YOU WIN!", (0, 255, 100)
+            else:
+                msg, color = "GAME OVER", (255, 0, 0)
+
+            go_text = self.game_over_font.render(msg, True, color)
             self.screen.blit(go_text, (self.screen_width // 2 - go_text.get_width() // 2, self.screen_height // 2 - go_text.get_height() // 2))
         else:
             # Draw Pickups
@@ -143,10 +154,10 @@ class GameManager:
         # Controls
         controls = self.font.render("Controls:", True, (200, 200, 200))
         self.screen.blit(controls, (self.screen_width + 10, 40))
-        ctrl_text = self.font.render("[1] Rule-Based   [SPACE] Attack", True, (150, 150, 150))
+        ctrl_text = self.font.render("[1] Rule-Based  [LMB/SPC] Attack", True, (150, 150, 150))
         self.screen.blit(ctrl_text, (self.screen_width + 10, 60))
         
-        # AI State
+        # AI State``
         ai_title = self.title_font.render(f"Active AI: {self.ai_type}", True, (100, 200, 255))
         self.screen.blit(ai_title, (self.screen_width + 10, 100))
         

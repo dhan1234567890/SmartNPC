@@ -15,12 +15,15 @@ def main():
     while running:
         dt = clock.tick(60) / 1000.0  # Delta time in seconds
         
+        mouse_clicked = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                mouse_clicked = True
         
         # Update game state
-        game_manager.update(dt)
+        game_manager.update(dt, mouse_clicked=mouse_clicked)
         
         # Render frame
         game_manager.draw()
