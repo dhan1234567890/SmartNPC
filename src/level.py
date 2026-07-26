@@ -2,6 +2,7 @@
 level.py - Level manager: draws the arena, obstacles, and goal zone.
 """
 
+# pyrefly: ignore [missing-import]
 import pygame
 from src.settings import (
     COLOR_BLACK, COLOR_CARTON_OUTLINE, COLOR_GOAL_ZONE,

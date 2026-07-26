@@ -2,6 +2,7 @@
 game.py - Core game loop: initialises Pygame, runs the update/draw cycle.
 """
 
+# pyrefly: ignore [missing-import]
 import pygame
 import sys
 from src.settings import SCREEN_WIDTH, SCREEN_HEIGHT, FPS, WINDOW_TITLE

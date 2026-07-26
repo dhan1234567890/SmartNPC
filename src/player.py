@@ -2,6 +2,7 @@
 player.py - Player sprite class (white triangle controlled via WASD).
 """
 
+# pyrefly: ignore [missing-import]
 import pygame
 from src.settings import (
     COLOR_PLAYER, PLAYER_SPEED, PLAYER_SIZE,
