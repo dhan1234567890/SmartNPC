@@ -1,0 +1,28 @@
+# Virtual Environments
+venv/
+ENV/
+env/
+.venv/
+[Vv][Ee][Nn][Vv]/
+
+# Python cache & compiled files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# IDE settings
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Build & Distribution artifacts
+build/
+dist/
+*.egg-info/
